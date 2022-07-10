@@ -93,7 +93,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FluentEveningDressesPage.cs" />
     <Compile Include="Framework\CheckOutPage.cs" />
     <Compile Include="Framework\ClothingCategoriesMenu.cs" />
     <Compile Include="Framework\Colour.cs" />
