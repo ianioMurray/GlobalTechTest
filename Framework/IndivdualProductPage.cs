@@ -4,7 +4,8 @@ using System;
 
 namespace GlobalTechTest.Framework
 {
-    public class IndivdualProductPage : Page
+    abstract public class IndivdualProductPage<SELF> : Page
+        where SELF : IndivdualProductPage<SELF>
     {
         private string sizeDropdownElementIdentifier = "group_1";
         private string blueColourElementIdentifier = ".color_pick[name='Blue']";
@@ -13,11 +14,12 @@ namespace GlobalTechTest.Framework
         private string addToCartElementIdentifier = "add_to_cart";
         private string popupContinueShoppingButtonElementIdentifeir = "[class*='button'][Title='Continue shopping']";
         private string popupProceedToCheckoutElementIdentifier = "[class*='button'][Title='Proceed to checkout']";
+        private string addToCartButton = "add_to_cart";
 
         public IndivdualProductPage(IWebDriver driver) : base(driver) { }
 
         // Select Size
-        public void SelectSize(Size size)
+        public virtual SELF SelectSize(Size size)
         {
             switch (size)
             {
@@ -32,6 +34,8 @@ namespace GlobalTechTest.Framework
                         break;
                     }
             }
+
+            return (SELF)this;
         }
 
         private void ChooseMediumSize()
@@ -48,7 +52,7 @@ namespace GlobalTechTest.Framework
 
 
         // Select Colour
-        public void SelectColour(Colour colour)
+        public SELF SelectColour(Colour colour)
         {
             switch (colour)
             {
@@ -68,6 +72,8 @@ namespace GlobalTechTest.Framework
                         break;
                     }
             }
+
+            return (SELF)this;
         }
 
         private void ChooseBlueColour()
@@ -89,20 +95,24 @@ namespace GlobalTechTest.Framework
         }
 
         // Add item to cart
-        public void AddItemToCart()
+        public SELF AddItemToCart()
         {
             IWebElement submitButton = Driver.FindElement(By.Id(addToCartElementIdentifier));
             submitButton.Click();
+
+            return (SELF)this;
         }
 
         // Select option from Popup displayed after adding product to the cart
-        public void ContinueShopping()
+        public SELF ContinueShopping()
         {
             WebDriverWait wait1 = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
             wait1.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(popupContinueShoppingButtonElementIdentifeir)));
 
             IWebElement continueShoppingButton = Driver.FindElement(By.CssSelector(popupContinueShoppingButtonElementIdentifeir));
             continueShoppingButton.Click();
+
+            return (SELF)this;
         }
 
         public void ProceedToCheckout()
@@ -112,6 +122,12 @@ namespace GlobalTechTest.Framework
 
             IWebElement continueShoppingButton = Driver.FindElement(By.CssSelector(popupProceedToCheckoutElementIdentifier));
             continueShoppingButton.Click();
+        }
+
+        protected void WaitForAddToCartButtonToBeVisible()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id(addToCartButton)));
         }
     }
 }

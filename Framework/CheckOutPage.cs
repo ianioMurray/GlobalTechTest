@@ -67,7 +67,7 @@ namespace GlobalTechTest.Framework
             }
         }
 
-        public List<string> GetProductsPriceTotal()
+        public string GetProductsPriceTotal(int productsIndex)
         {
             List<string> lineTotalPrices = new List<string>();
             IReadOnlyCollection<IWebElement> productTableRows = getProductRows();
@@ -78,7 +78,7 @@ namespace GlobalTechTest.Framework
                 lineTotalPrices.Add(productTotalPriceCell.Text);
             }
 
-            return lineTotalPrices;
+            return lineTotalPrices[productsIndex];
         }
 
         public string getShoppingCartTotal()
