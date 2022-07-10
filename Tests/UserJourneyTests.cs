@@ -2,8 +2,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Shouldly;
-using System.Collections.Generic;
-using System.Threading;
 using Xunit;
 
 namespace GlobalTechTest.Tests
@@ -26,19 +24,31 @@ namespace GlobalTechTest.Tests
                 categoryMenu.SelectTShirtsFromTheWomenMenu();
 
                 TShirtsPage tShirtsPage = new TShirtsPage(driver);
-                tShirtsPage.SelectShortSleeveFadedTShirt().SelectSize(Size.Medium).SelectColour(Colour.Blue).AddItemToCart().ContinueShopping();
+                tShirtsPage.SelectShortSleeveFadedTShirt()
+                    .SelectSize(Size.Medium)
+                    .SelectColour(Colour.Blue)
+                    .AddItemToCart()
+                    .ContinueShopping();
 
                 // Add to the cart an Evening Dress, size small, colour beige
                 categoryMenu.SelectEveningDressesFromTheWomenMenu();
 
                 EveningDressesPage eveningDressesPage = new EveningDressesPage(driver);
-                eveningDressesPage.SelectPrintedDress().SelectSize(Size.Small).SelectColour(Colour.Beige).AddItemToCart().ContinueShopping();
+                eveningDressesPage.SelectPrintedDress()
+                    .SelectSize(Size.Small)
+                    .SelectColour(Colour.Beige)
+                    .AddItemToCart()
+                    .ContinueShopping();
 
                 // Add to the cart a Printed Summer Dress, size medium, colour orange
                 categoryMenu.SelectSummerDressesFromTheWomenMenu();
 
                 SummerDressesPage summerDressesPage = new SummerDressesPage(driver);
-                summerDressesPage.SelectPrintedSummerDress().SelectSize(Size.Medium).SelectColour(Colour.Orange).AddItemToCart().ProceedToCheckout();
+                summerDressesPage.SelectPrintedSummerDress()#
+                    .SelectSize(Size.Medium)
+                    .SelectColour(Colour.Orange)
+                    .AddItemToCart()
+                    .ProceedToCheckout();
 
                 // Checkout
                 CheckOutPage checkOutPage = new CheckOutPage(driver);
@@ -50,7 +60,11 @@ namespace GlobalTechTest.Tests
                 // Add a second Faded Short Sleeve T Shirt of the same size and colour
                 categoryMenu.SelectTShirtsFromTheWomenMenu();
 
-                tShirtsPage.SelectShortSleeveFadedTShirt().SelectSize(Size.Medium).SelectColour(Colour.Blue).AddItemToCart().ProceedToCheckout();
+                tShirtsPage.SelectShortSleeveFadedTShirt()
+                    .SelectSize(Size.Medium)
+                    .SelectColour(Colour.Blue)
+                    .AddItemToCart()
+                    .ProceedToCheckout();
 
                 checkOutPage.EnsurePageLoaded();
 
