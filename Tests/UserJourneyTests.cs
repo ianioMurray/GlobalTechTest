@@ -44,7 +44,7 @@ namespace GlobalTechTest.Tests
                 categoryMenu.SelectSummerDressesFromTheWomenMenu();
 
                 SummerDressesPage summerDressesPage = new SummerDressesPage(driver);
-                summerDressesPage.SelectPrintedSummerDress()#
+                summerDressesPage.SelectPrintedSummerDress()
                     .SelectSize(Size.Medium)
                     .SelectColour(Colour.Orange)
                     .AddItemToCart()
